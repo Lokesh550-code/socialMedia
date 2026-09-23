@@ -1,0 +1,13 @@
+import mongoose from "mongoose";
+
+const postSchema = mongoose.Schema(
+  {
+    imageUrl: { type: String, required: true },
+    caption: { type: String, required: true },
+  },
+  { timestamps: true },
+);
+
+const postModel = mongoose.model("post", postSchema);
+
+export default postModel;
