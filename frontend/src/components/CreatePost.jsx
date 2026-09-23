@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { createPost } from "../services/API.js";
+import { useNavigate } from "react-router";
 
 const CreatePost = () => {
+  const navigate = useNavigate();
   const [image, setImage] = useState(null);
   const [caption, setCaption] = useState("");
 
@@ -11,9 +14,17 @@ const CreatePost = () => {
     data.append("image", image);
     data.append("caption", caption);
 
-    for (const [key, value] of data.entries()) {
-      console.log(key, value);
+    try {
+      const setData = async (formData) => {
+        await createPost(formData);
+      };
+      setData(data);
+    } catch (error) {
+      console.log(error);
     }
+    setImage(null);
+    setCaption("");
+    navigate("/view-posts");
   };
 
   const handleImageChange = (event) => {
@@ -23,7 +34,17 @@ const CreatePost = () => {
     }
   };
   return (
-    <div className="min-h-screen w-full bg-zinc-950 text-white flex items-center justify-center px-4">
+    <div className="min-h-screen w-full bg-zinc-950 text-white flex flex-col items-center justify-center px-4">
+      <div className="w-full h-20 flex justify-center items-center ">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="bg-zinc-800 text-lg px-4 py-3 rounded-xl border-zinc-500 boorder-2 hover:bg-zinc-700 hover:cursor-pointer"
+        >
+          Home
+        </button>
+      </div>
       <div className="w-full max-w-lg">
         <div className="mb-6">
           <h1 className="text-3xl font-semibold">Create a post</h1>

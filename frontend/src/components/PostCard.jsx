@@ -1,8 +1,9 @@
-const PostCard = (elem) => {
+const PostCard = ({elem}) => {
+  console.group(elem)
   return (
-    <div className="w-full max-w-md overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900">
+    <div className="w-full mb-3 max-w-md overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900">
       <img
-        src={elem.image}
+        src={elem.imageURL}
         alt={elem.caption}
         className="h-auto w-full object-cover"
       />

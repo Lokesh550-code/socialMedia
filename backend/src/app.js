@@ -1,10 +1,12 @@
 import express from "express";
 import multer from "multer";
+import cors from "cors";
 import fileUpload from "./services/imageStorage.service.js";
 import postModel from "./model/post.model.js";
 
 const app = new express();
 
+app.use(cors());
 app.use(express.json());
 const upload = multer({ storage: multer.memoryStorage() });
 
